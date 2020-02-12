@@ -14,4 +14,4 @@ jeu.o :		jeu.c jeu.h
 		gcc -c jeu.c
 
 clean :
-		rm *.o main
+		rm -f *.o main
