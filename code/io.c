@@ -1,3 +1,4 @@
+#include <string.h>
 #include "io.h"
 
 void affiche_trait (int c){
@@ -32,10 +33,11 @@ void efface_grille (grille g){
 }
 
 void debut_jeu(grille *g, grille *gc){
-	char c = getchar(); 
+	char c = getchar();
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
+
 			case '\n' : 
 			{ // touche "entree" pour évoluer
 				evolue(g,gc);
@@ -43,6 +45,24 @@ void debut_jeu(grille *g, grille *gc){
 				affiche_grille(*g);
 				break;
 			}
+
+			case 'n' :
+			{ // touche 'n' pour charger dynamiquement une nouvelle grille
+
+				libere_grille(g);
+				libere_grille(gc);
+
+				char numeroGrille[19];
+				printf("Entrez ->  grilles/grille<numero de la grille>.txt : ");
+				scanf("%256s", numeroGrille);
+				init_grille_from_file(numeroGrille, g);
+				alloue_grille (g->nbl, g->nbc, gc);
+				affiche_grille(*g);
+				printf("\n\e[2A");
+				printf("\n");
+				break;
+			}
+
 			default : 
 			{ // touche non traitée
 				printf("\n\e[1A");
