@@ -1,20 +1,43 @@
+
+# variables associees aux dossiers 
+
+SDIR = src
+ODIR = obj
+BDIR = bin
+IDIR = include
+
+# compile flags
+
+CFLAGS = -Wall -Iinclude
+
+
+
+
 main:		main.o grille.o jeu.o io.o
-		gcc -o main main.o grille.o jeu.o io.o -lm
+		@mkdir -p $(BDIR)
+		gcc $(CFLAGS) -o $(BDIR)/main $(ODIR)/main.o $(ODIR)/grille.o $(ODIR)/jeu.o $(ODIR)/io.o -lm
 
-main.o:		code/main.c code/grille.h code/jeu.h code/io.h
-		gcc -c code/main.c
+main.o:		$(SDIR)/main.c
+		@mkdir -p $(ODIR)
+		gcc $(CFLAGS) -o $(ODIR)/main.o -c $(SDIR)/main.c
 
-grille.o:	code/grille.c code/grille.h
-		gcc -c code/grille.c
+grille.o:	$(SDIR)/grille.c 
+		@mkdir -p $(ODIR)
+		gcc $(CFLAGS) -o $(ODIR)/grille.o -c $(SDIR)/grille.c
 
-io.o:		code/io.c code/io.h
-		gcc -c code/io.c
+io.o:		$(SDIR)/io.c 
+		@mkdir -p $(ODIR)
+		gcc $(CFLAGS) -o $(ODIR)/io.o -c $(SDIR)/io.c
 
-jeu.o:		code/jeu.c code/jeu.h
-		gcc -c code/jeu.c
+jeu.o:		$(SDIR)/jeu.c
+		@mkdir -p $(ODIR)
+		gcc $(CFLAGS) -o $(ODIR)/jeu.o -c $(SDIR)/jeu.c
 
-clean:
-		rm -rf *.o main
+clean:	
+		rm -rf $(ODIR)/*.o $(BDIR)/main
+		rm -rf dist/
+		rm -rf $(BDIR)
+		rm -rf $(ODIR)
 
 dist:
-		tar -c --lzma -f DISTEL_Louis_tar.xz *.c *.h Makefile
+		tar -c --lzma -f DISTEL_Louis_GoL.tar.xz src include Makefile README.md
