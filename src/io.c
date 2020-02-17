@@ -16,9 +16,11 @@ void affiche_ligne (int c, int* ligne){
 	return;
 }
 
-void affiche_grille (grille g, int tempsEvolution){
+void affiche_grille (grille g, int tempsEvolution, int comptageCyclique){
 	int i, l=g.nbl, c=g.nbc;
-	printf("Temps d'évolution : %d", tempsEvolution);
+	printf("Temps d'évolution : %d | ", tempsEvolution);
+	printf("Comptage : ");
+	comptageCyclique ? printf("Cyclique     ") : printf("Non-cyclique");
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
@@ -34,18 +36,21 @@ void efface_grille (grille g){
 }
 
 void debut_jeu(grille *g, grille *gc){
+	
 	char c = getchar();
 	int tempsEvolution = 1;
+	int comptageCyclique = 1;
+	int (*compte_voisins_vivants) (int, int, grille) = compte_voisins_vivants_cyclique;
+
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
 
 			case '\n' : 
 			{ // touche "entree" pour évoluer
-				evolue(g,gc);
+				evolue(g,gc, &tempsEvolution, compte_voisins_vivants);
 				efface_grille(*g);
-				affiche_grille(*g, tempsEvolution);
-				tempsEvolution++;
+				affiche_grille(*g, tempsEvolution, comptageCyclique);
 				break;
 			}
 
@@ -61,8 +66,26 @@ void debut_jeu(grille *g, grille *gc){
 				alloue_grille (g->nbl, g->nbc, gc);
 				tempsEvolution = 0;
 				printf("\n");
-				affiche_grille(*g, tempsEvolution);
+				affiche_grille(*g, tempsEvolution, comptageCyclique);
 				printf("\n\e[2A");
+				printf("\n");
+				break;
+			}
+
+			case 'c' :
+			{
+				// voisinnage cyclique / non-cyclique
+				if (comptageCyclique) { // On repasse à un comptage non-cyclique
+					comptageCyclique = 0;
+					compte_voisins_vivants = &(compte_voisins_vivants_non_cyclique);
+				} 
+				else { // On repasse à un comptage cyclique
+					comptageCyclique = 1;
+					compte_voisins_vivants = &(compte_voisins_vivants_cyclique);
+				}
+
+				printf("\e[A");
+				printf("\e[K");
 				printf("\n");
 				break;
 			}

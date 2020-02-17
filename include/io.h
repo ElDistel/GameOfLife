@@ -39,9 +39,10 @@ void affiche_ligne (int c, int* ligne);
  *
  * \param tempsEvolution Temps actuel de l'évolution
  * \param g Grille actuellement utilisée.
+ * \param comptageCyclique comptage actuellment utilisé
  */
 
-void affiche_grille (grille g, int tempsEvolution);
+void affiche_grille (grille g, int tempsEvolution, int comptageCyclique);
 
 /**
  * \fn void efface_grille (grille g)
