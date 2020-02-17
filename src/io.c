@@ -16,8 +16,9 @@ void affiche_ligne (int c, int* ligne){
 	return;
 }
 
-void affiche_grille (grille g){
+void affiche_grille (grille g, int tempsEvolution){
 	int i, l=g.nbl, c=g.nbc;
+	printf("Temps d'évolution : %d", tempsEvolution);
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
@@ -34,6 +35,7 @@ void efface_grille (grille g){
 
 void debut_jeu(grille *g, grille *gc){
 	char c = getchar();
+	int tempsEvolution = 1;
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
@@ -42,13 +44,13 @@ void debut_jeu(grille *g, grille *gc){
 			{ // touche "entree" pour évoluer
 				evolue(g,gc);
 				efface_grille(*g);
-				affiche_grille(*g);
+				affiche_grille(*g, tempsEvolution);
+				tempsEvolution++;
 				break;
 			}
 
 			case 'n' :
 			{ // touche 'n' pour charger dynamiquement une nouvelle grille
-
 				libere_grille(g);
 				libere_grille(gc);
 
@@ -57,7 +59,9 @@ void debut_jeu(grille *g, grille *gc){
 				scanf("%256s", numeroGrille);
 				init_grille_from_file(numeroGrille, g);
 				alloue_grille (g->nbl, g->nbc, gc);
-				affiche_grille(*g);
+				tempsEvolution = 0;
+				printf("\n");
+				affiche_grille(*g, tempsEvolution);
 				printf("\n\e[2A");
 				printf("\n");
 				break;

@@ -35,12 +35,13 @@ void affiche_ligne (int c, int* ligne);
 
 /**
  * \fn void affiche_grille (grille g)
- * \brief Affichage d'une grille
+ * \brief Affichage d'une grille et les informations associées
  *
+ * \param tempsEvolution Temps actuel de l'évolution
  * \param g Grille actuellement utilisée.
  */
 
-void affiche_grille (grille g);
+void affiche_grille (grille g, int tempsEvolution);
 
 /**
  * \fn void efface_grille (grille g)
