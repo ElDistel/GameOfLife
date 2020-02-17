@@ -1,3 +1,10 @@
+/**
+ * \file io.h
+ * \brief Fonctions d'affichage du jeu
+ * \author Louis Distel
+ */
+
+
 #ifndef __IO_H
 #define __IO_H
 
@@ -5,19 +12,52 @@
 #include "grille.h"
 #include "jeu.h"
 
-// affichage d'un trait horizontal
+
+/**
+ * \fn void affiche_trait (int c)
+ * \brief Affichage d'un trait horizontal
+ *
+ * \param c Dimension de la grille.
+ */
+
 void affiche_trait (int c);
 
-// affichage d'une ligne de la grille
+/**
+ * \fn void affiche_ligne (int c, int* ligne)
+ * \brief Affichage d'une ligne de la grille
+ *
+ * \param ligne Tableau contenant la valeur de chaque cellules de la grille.
+ * \param c Dimension de la grille.
+ */
+
 void affiche_ligne (int c, int* ligne);
 
-// affichage d'une grille
+
+/**
+ * \fn void affiche_grille (grille g)
+ * \brief Affichage d'une grille
+ *
+ * \param g Grille actuellement utilisée.
+ */
+
 void affiche_grille (grille g);
 
-// effacement d'une grille
+/**
+ * \fn void efface_grille (grille g)
+ * \brief Effacement d'une grille
+ *
+ * \param g Grille actuellement utilisée.
+ */
+
 void efface_grille (grille g);
 
-// debute le jeu
+
+/**
+ * \fn void debut_jeu(grille *g, grille *gc)
+ * \brief Debute le jeu
+ *
+ * \param g Grille actuellement utilisée.
+ */
 void debut_jeu(grille *g, grille *gc);
 
 #endif
