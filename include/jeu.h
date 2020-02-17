@@ -42,6 +42,7 @@ int compte_voisins_vivants_non_cyclique (int i, int j, grille g);
  * \param i Ligne de la cellule
  * \param j Colonne de la cellule
  * \param g Grille dans laquelle se trouve cette cellule et ses voisins à compter
+ * 
  * \return Nombre de voisins vivants
  */
 
@@ -55,7 +56,9 @@ int compte_voisins_vivants_cyclique (int i, int j, grille g);
  * \param gc pointeur sur grille.
  * \param tempsEvolution pointeur sur le temps d'evolution actuel
  * \param compte_voisins_vivants pointeur sur le calcul de voisinage en cours
+ * \param vieillissement vieillissement de la cellule
+ * 
  */
-void evolue (grille *g, grille *gc, int *tempsEvolution, int (*compte_voisins_vivants) (int, int, grille));
+void evolue (grille *g, grille *gc, int *tempsEvolution, int (*compte_voisins_vivants) (int, int, grille), int vieillissement);
 
 #endif

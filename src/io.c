@@ -8,23 +8,34 @@ void affiche_trait (int c){
 	return;
 }
 
-void affiche_ligne (int c, int* ligne){
+void affiche_ligne (int c, int* ligne, int vieillissement) {
 	int i;
-	for (i=0; i<c; ++i) 
-		if (ligne[i] == 0 ) printf ("|   "); else printf ("| O ");
+	if (vieillissement) {
+		for (i=0; i<c; ++i) {
+			if (ligne[i] == 0 ) printf ("|   ");
+			else printf ("| %d ", ligne[i]);
+		}
+	} else {
+		for (i=0; i<c; ++i) {
+			if (ligne[i] == 0 ) printf ("|   ");
+			else printf ("| 0 ");
+		}
+	}
 	printf("|\n");
 	return;
 }
 
-void affiche_grille (grille g, int tempsEvolution, int comptageCyclique){
+void affiche_grille (grille g, int tempsEvolution, int comptageCyclique, int vieillissement){
 	int i, l=g.nbl, c=g.nbc;
 	printf("Temps d'évolution : %d | ", tempsEvolution);
 	printf("Comptage : ");
-	comptageCyclique ? printf("Cyclique     ") : printf("Non-cyclique");
+	comptageCyclique ? printf("Cyclique      | ") : printf("Non-cyclique | ");
+	printf("Vieillissement : ");
+	vieillissement ? printf("Activé    ") : printf("Désactivé");
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
-		affiche_ligne(c, g.cellules[i]);
+		affiche_ligne(c, g.cellules[i], vieillissement);
 		affiche_trait(c);
 	}	
 	printf("\n"); 
@@ -40,6 +51,7 @@ void debut_jeu(grille *g, grille *gc){
 	char c = getchar();
 	int tempsEvolution = 1;
 	int comptageCyclique = 1;
+	int vieillissement = 0;
 	int (*compte_voisins_vivants) (int, int, grille) = compte_voisins_vivants_cyclique;
 
 	while (c != 'q') // touche 'q' pour quitter
@@ -48,9 +60,9 @@ void debut_jeu(grille *g, grille *gc){
 
 			case '\n' : 
 			{ // touche "entree" pour évoluer
-				evolue(g,gc, &tempsEvolution, compte_voisins_vivants);
+				evolue(g,gc, &tempsEvolution, compte_voisins_vivants, vieillissement);
 				efface_grille(*g);
-				affiche_grille(*g, tempsEvolution, comptageCyclique);
+				affiche_grille(*g, tempsEvolution, comptageCyclique, vieillissement);
 				break;
 			}
 
@@ -66,9 +78,9 @@ void debut_jeu(grille *g, grille *gc){
 				alloue_grille (g->nbl, g->nbc, gc);
 				tempsEvolution = 0;
 				printf("\n");
-				affiche_grille(*g, tempsEvolution, comptageCyclique);
-				printf("\n\e[2A");
+				affiche_grille(*g, tempsEvolution, comptageCyclique, vieillissement);
 				printf("\n");
+				
 				break;
 			}
 
@@ -83,10 +95,13 @@ void debut_jeu(grille *g, grille *gc){
 					comptageCyclique = 1;
 					compte_voisins_vivants = &(compte_voisins_vivants_cyclique);
 				}
+				break;
+			}
 
-				printf("\e[A");
-				printf("\e[K");
-				printf("\n");
+			case 'v' :
+			{
+				// activation / désactivation du vieillissement
+				vieillissement = !vieillissement;
 				break;
 			}
 

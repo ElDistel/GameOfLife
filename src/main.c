@@ -22,8 +22,8 @@ int main (int argc, char ** argv) {
 	printf("- c : Passer en mode cyclique/non-cyclique\n");
 	printf("- q : Quitter le programme\n\n");
 
-	//temps d'évolution initial à 1
-	affiche_grille(g, 1, 1);	
+	//temps d'évolution initial à 1, le comptage cyclique à 1, le vieillissement désactivé à 0
+	affiche_grille(g, 1, 1, 0);	
 	debut_jeu(&g, &gc);
 
 	libere_grille(&g);

@@ -29,7 +29,7 @@ int compte_voisins_vivants_cyclique (int i, int j, grille g){
 	return v;
 }
 
-void evolue (grille *g, grille *gc, int *tempsEvolution, int (*compte_voisins_vivants) (int, int, grille)){
+void evolue (grille *g, grille *gc, int *tempsEvolution, int (*compte_voisins_vivants) (int, int, grille), int vieillissement){
 	(*tempsEvolution)++;
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc,v;
@@ -40,7 +40,15 @@ void evolue (grille *g, grille *gc, int *tempsEvolution, int (*compte_voisins_vi
 			v = compte_voisins_vivants (i, j, *gc);
 			if (est_vivante(i,j,*g)) 
 			{ // evolution d'une cellule vivante
-				if ( v!=2 && v!= 3 ) set_morte(i,j,*g);
+				if ( v!=2 && v!= 3 )
+					set_morte(i,j,*g);
+				else if (vieillissement) 
+					g->cellules[i][j]++;
+				else 
+					g->cellules[i][j] = 1; // Réinitialisation de l'age si la cellule avait subit un vieillissement
+
+				if (vieillissement && (g->cellules[i][j] > 8)) 
+					set_morte(i,j,*g);
 			}
 			else 
 			{ // evolution d'une cellule morte
