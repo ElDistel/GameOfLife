@@ -3,7 +3,7 @@
 obj/
 bin/
 dist/
-
+doc/
 
 # Prerequisites
 *.d
