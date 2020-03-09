@@ -5,10 +5,13 @@ Ce dépôt contient l'intégralité de l'avancée du projet de Technique de dév
 
 # Fichiers
 
- - /src contient tous les fichiers sources (*.c)
- - /include contient tous les fichiers headers (*.h)
- - /doc contient la documentation
- - /grilles contient les grilles utilisées par le jeu
+ - /src :			contient tous les fichiers sources (*.c)
+ - /include :	contient tous les fichiers headers (*.h)
+ - /doc :		contient la documentation
+ - /grilles :	contient les grilles utilisées par le jeu
+ - /bin :		contient les fichiers binaires
+ - /obj	 : 		contient les fichiers objets (*.o)
+ - Makefile : fichier de compilation
 
 # Commandes
 
