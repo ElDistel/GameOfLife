@@ -20,6 +20,7 @@ int main (int argc, char ** argv) {
 	printf("Commandes du programme :\n");
 	printf("- n : Charger une nouvelle grille\n");
 	printf("- c : Passer en mode cyclique/non-cyclique\n");
+	printf("- v : Passer en mode vieillissement\n");
 	printf("- q : Quitter le programme\n\n");
 
 	//temps d'évolution initial à 1, le comptage cyclique à 1, le vieillissement désactivé à 0

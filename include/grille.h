@@ -89,6 +89,19 @@ static inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
 static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
 
 
+/**
+ * \fn static inline void set_non_viable(int i, int j, grille g)
+ * \brief   rend non viable la cellule (i,j) de la grille g
+ *
+ * \param g Grille actuellement utilisée.
+ * \param c Dimension de la grille.
+ * \param l Dimension de la grille.
+ * 
+ */
+
+static inline void set_non_viable(int i, int j, grille g){g.cellules[i][j] = -1;}
+
+
 
 /**
  * \fn static inline void est_vivante(int i, int j, grille g)
@@ -102,6 +115,21 @@ static inline void set_morte(int i, int j, grille g){g.cellules[i][j] = 0;}
  */
 
 static inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] >= 1;}
+
+
+/**
+ * \fn static inline void est_non_viable(int i, int j, grille g)
+ * \brief Teste si la cellule (i,j) de la grille g est non viable
+ *
+ * \param g Grille actuellement utilisée.
+ * \param c Dimension de la grille.
+ * \param l Dimension de la grille.
+ * 
+ * \return un int indiquant si la cellule est morte ou vivante
+ */
+
+static inline int est_non_viable(int i, int j, grille g){return g.cellules[i][j] == -1;}
+
 
 
 /**

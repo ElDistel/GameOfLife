@@ -29,6 +29,7 @@ void affiche_trait (int c);
  * \param ligne Tableau contenant la valeur de chaque cellules de la grille.
  * \param c Dimension de la grille.
  * \param vieillissement vieillissement de la cellule
+ * 
  */
 
 void affiche_ligne (int c, int* ligne, int vieillissement);
@@ -42,6 +43,7 @@ void affiche_ligne (int c, int* ligne, int vieillissement);
  * \param g Grille actuellement utilisée.
  * \param comptageCyclique comptage actuellment utilisé
  * \param vieillissement vieillissement de la cellule
+ * 
  */
 
 void affiche_grille (grille g, int tempsEvolution, int comptageCyclique, int vieillissement);

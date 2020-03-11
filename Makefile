@@ -40,4 +40,4 @@ clean:
 		rm -rf $(ODIR)
 
 dist:
-		tar -c --lzma -f DistelLouis-GoL-v3.0.tar.xz src include Makefile README.md
+		tar -c --lzma -f DistelLouis-GoL-v3.0.tar.xz src include grilles Makefile Doxyfile

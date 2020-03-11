@@ -52,7 +52,7 @@ void evolue (grille *g, grille *gc, int *tempsEvolution, int (*compte_voisins_vi
 			}
 			else 
 			{ // evolution d'une cellule morte
-				if ( v==3 ) set_vivante(i,j,*g);
+				if ( v==3 && g->cellules[i][j]!=-1 ) set_vivante(i,j,*g);
 			}
 		}
 	}
