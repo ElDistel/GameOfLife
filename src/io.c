@@ -13,6 +13,7 @@ void affiche_ligne (int c, int* ligne, int vieillissement) {
 	if (vieillissement) {
 		for (i=0; i<c; ++i) {
 			if (ligne[i] == 0 ) printf ("|   ");
+			else if (ligne[i] == -1) printf("| X ");
 			else printf ("| %d ", ligne[i]);
 		}
 	} else {
@@ -30,9 +31,9 @@ void affiche_grille (grille g, int tempsEvolution, int comptageCyclique, int vie
 	int i, l=g.nbl, c=g.nbc;
 	printf("Temps d'évolution : %d | ", tempsEvolution);
 	printf("Comptage : ");
-	comptageCyclique ? printf("Cyclique      | ") : printf("Non-cyclique | ");
+	comptageCyclique ? printf("Cyclique     | ") : printf("Non-cyclique | ");
 	printf("Vieillissement : ");
-	vieillissement ? printf("Activé    ") : printf("Désactivé");
+	vieillissement ? printf("Activé    ") : printf("Désactivé		");
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
