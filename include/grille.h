@@ -60,7 +60,7 @@ void libere_grille (grille* g);
  * 
  */
 
-void init_grille_from_file (char * filename, grille* g);
+int init_grille_from_file (char * filename, grille* g);
 
  
 /**
