@@ -143,4 +143,7 @@ static inline int est_non_viable(int i, int j, grille g){return g.cellules[i][j]
 
 void copie_grille (grille gs, grille gd);
 
+
+int grilleOscillante(grille *g, int (*compte_voisins_vivants) (int, int, grille), int vieillissement);
+
 #endif

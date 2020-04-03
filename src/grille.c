@@ -1,4 +1,5 @@
 #include "grille.h"
+#include "jeu.h"
 
 int init_grille_from_file (char * filename, grille* g){
 	int res = 0;
@@ -63,4 +64,65 @@ void libere_grille(grille *g)
                 free(g->cellules[i]);
         }
         free(g->cellules);
+}
+
+
+int grilleVide(grille *g) {
+	int i, j;
+	for (i = 0; i < g->nbl; i++) {
+		for (j = 0; j < g->nbc; j++) {
+			if (g->cellules[i][j] > 0)
+				return 0;
+		}
+	}
+	return 1;
+}
+
+
+int grillesEgales(grille *g1, grille *g2) {
+	int i, j;
+	for (i = 0; i < g1->nbl; i++) {
+		for (j = 0; j < g1->nbc; j++) {
+			if (g1->cellules[i][j] != g2->cellules[i][j])
+				return 0;
+		}
+	}
+	return 1;
+}
+
+
+int grilleOscillante(grille *g, int (*compte_voisins_vivants) (int, int, grille), int vieillissement) {
+	int tempsEvolutionOscillation = 0;
+	grille copieInitiale, copieIteree, tmp;
+	alloue_grille (g->nbl, g->nbc, &copieInitiale);
+	copie_grille(*g, copieInitiale);
+
+	alloue_grille (g->nbl, g->nbc, &copieIteree);
+	copie_grille(*g, copieIteree);
+
+	alloue_grille (g->nbl, g->nbc, &tmp);
+	copie_grille(*g, tmp);
+
+	int maxInterval = 1000; // On suppose qu'au-delà de 1000 évolutions, une grille ne peut pas être oscillante
+
+	int maxDelais = 100; // On suppose qu'au-delà de 100 évolutions, il ne peut plus y avoir de comportement oscillatoire
+	int i = 0;
+	 do {
+		while (tempsEvolutionOscillation < maxInterval) {
+			evolue(&copieIteree,&tmp,&tempsEvolutionOscillation,compte_voisins_vivants,vieillissement); // Met à jour tempsEvolutionOscillation
+			if (grilleVide(&copieInitiale)) {
+				return 0;
+			}
+			if (grillesEgales(&copieInitiale, &copieIteree)) {
+				return tempsEvolutionOscillation;
+			}
+		}
+
+		evolue(&copieInitiale,&tmp,&tempsEvolutionOscillation,compte_voisins_vivants,vieillissement);
+		copie_grille(copieInitiale, copieIteree);
+		tempsEvolutionOscillation = 0; // Réinitialisation du temps d'une oscillation
+		i++;
+	} while (i < maxDelais);
+
+	return 0;
 }

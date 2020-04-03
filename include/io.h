@@ -112,8 +112,9 @@ void debut_jeu(grille *g, grille *gc);
  * \param g Grille actuellement utilisée.
  * \param comptageCyclique comptage actuellment utilisé
  * \param vieillissement vieillissement de la cellule
+ * \param tempsOsc   Indique le temps d'oscillation d'une grille
  * 
  */
-void affiche_grille (grille g, int tempsEvolution, int comptageCyclique, int vieillissement);
+void affiche_grille (grille g, int tempsEvolution, int comptageCyclique, int vieillissement, int tempsOsc);
 
 #endif
