@@ -22,8 +22,8 @@
 
     /** 
      * Création d'une surface Xlib Cairo
-     * @param[in] x Largeur de la surface (en pixels)
-     * @param[in] y Hauteur de la surface (en pixels)
+     * \param  x Largeur de la surface (en pixels)
+     * \param  y Hauteur de la surface (en pixels)
      */
     cairo_surface_t *cairo_create_x11_surface0(int x, int y);
 
@@ -34,19 +34,19 @@
 
     /**
      * Affichage d'un trait horizontal (en mode GUI Cairo)
-     * @param[in] c           Nombre de cellules du trait
-     * @param[in] hauteur     Numéro de la hauteur du trait à tracer (en partant du haut de la grille)
-     * @param[in] tailleLigne Hauteur de la ligne (en pixels)
+     * \param  c           Nombre de cellules du trait
+     * \param  hauteur     Numéro de la hauteur du trait à tracer (en partant du haut de la grille)
+     * \param  tailleLigne Hauteur de la ligne (en pixels)
      */
     void affiche_trait (int c, int hauteur, float tailleLigne);
 
     /**
      * Affichage d'une ligne de la grille (en mode GUI Cairo)
-     * @param[in] c              Nombre de cellules de la ligne
-     * @param[in] ligne          Tableau indiquant pour chaque cellule si elle est vivante ou morte
-     * @param[in] vieillissement Indique si le vieillissement est activé (1) ou désactivé (0)
-     * @param[in] hauteur        Numéro de la hauteur du trait à tracer (en partant du haut de la grille)
-     * @param[in] tailleLigne    Hauteur de la ligne (en pixels)
+     * \param  c              Nombre de cellules de la ligne
+     * \param  ligne          Tableau indiquant pour chaque cellule si elle est vivante ou morte
+     * \param  vieillissement Indique si le vieillissement est activé (1) ou désactivé (0)
+     * \param  hauteur        Numéro de la hauteur du trait à tracer (en partant du haut de la grille)
+     * \param  tailleLigne    Hauteur de la ligne (en pixels)
      */
     void affiche_ligne (int c, int* ligne, int vieillissement, int hauteur, float tailleLigne);
 
@@ -57,8 +57,8 @@
 
     /**
      * Affiche une entrée de texte au bas de l'écran
-     * @param[in] input  Entrée à afficher (saisie au clavier)
-     * @param[in] erreur Erreur à afficher entre parenthèses si nécessaire
+     * \param input  Entrée à afficher (saisie au clavier)
+     * \param erreur Erreur à afficher entre parenthèses si nécessaire
      */
     void drawTextInput(char *input, char *erreur);
 

@@ -42,4 +42,4 @@ clean:
 	rm -rf $(LDIR)
 
 dist:
-	tar -c --lzma -f DistelLouis-GoL-v3.0.tar.xz src include grilles Makefile Doxyfile
+	tar -c --lzma -f DistelLouis-GoL-v6.0.tar.xz src include grilles Makefile Doxyfile
